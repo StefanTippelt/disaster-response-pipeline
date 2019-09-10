@@ -15,14 +15,16 @@ from nltk import download
 from nltk.tokenize import word_tokenize
 from sklearn.metrics import classification_report
 
+# download nltk dependencies
 download("punkt")
+download("wordnet")
 
 
 def load_data(database_filepath: str):
     #  -> tuple[pd.Series, pd.DataFrame, list]
     """Load data from database."""
     engine = create_engine("sqlite:///" + database_filepath)
-    df = pd.read_sql_table("desaster_response", con=engine)
+    df = pd.read_sql_table("disaster_messages", con=engine)
     X = df["message"]
     Y = df.iloc[:, 4:]
     category_names = Y.columns
@@ -44,8 +46,14 @@ def build_model():
     )
 
     parameters = {
-        "clf__estimator__min_samples_split": [5, 10, 15],
-        "clf__estimator__n_estimators": [50, 100, 150],
+        "clf__estimator__min_samples_split": [
+            5
+            # , 10, 15
+        ],
+        "clf__estimator__n_estimators": [
+            50
+            # , 100, 150
+        ],
     }
 
     cv = GridSearchCV(
@@ -104,7 +112,7 @@ def main():
             "Please provide the filepath of the disaster messages database "
             "as the first argument and the filepath of the pickle file to "
             "save the model to as the second argument. \n\nExample: python "
-            "train_classifier.py ../data/DisasterResponse.db classifier.pkl"
+            "train_classifier.py ../data/disaster.db classifier.pkl"
         )
 
 

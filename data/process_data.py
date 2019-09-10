@@ -51,7 +51,7 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
 def save_data(df: pd.DataFrame, database_filename: str) -> None:
     """Save dataframe to database."""
     engine = create_engine("sqlite:///" + database_filename)
-    df.to_sql("desaster_response", engine, index=False)
+    df.to_sql("disaster_messages", engine, index=False)
     return None
 
 
@@ -84,7 +84,7 @@ def main():
             "well as the filepath of the database to save the cleaned data "
             "to as the third argument. \n\nExample: python process_data.py "
             "disaster_messages.csv disaster_categories.csv "
-            "DisasterResponse.db"
+            "disaster.db"
         )
 
 
