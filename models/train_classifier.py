@@ -46,14 +46,8 @@ def build_model():
     )
 
     parameters = {
-        "clf__estimator__min_samples_split": [
-            5
-            # , 10, 15
-        ],
-        "clf__estimator__n_estimators": [
-            50
-            # , 100, 150
-        ],
+        "clf__estimator__min_samples_split": [5, 10, 15],
+        "clf__estimator__n_estimators": [50, 100, 150],
     }
 
     cv = GridSearchCV(
