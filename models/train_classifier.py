@@ -11,11 +11,15 @@ from sklearn.model_selection import GridSearchCV
 
 import pickle
 
+from nltk import download
 from nltk.tokenize import word_tokenize
 from sklearn.metrics import classification_report
 
+download("punkt")
 
-def load_data(database_filepath: str) -> tuple[pd.Series, pd.DataFrame, list]:
+
+def load_data(database_filepath: str):
+    #  -> tuple[pd.Series, pd.DataFrame, list]
     """Load data from database."""
     engine = create_engine("sqlite:///" + database_filepath)
     df = pd.read_sql_table("desaster_response", con=engine)
